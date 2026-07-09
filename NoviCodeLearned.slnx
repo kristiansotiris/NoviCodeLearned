@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Application/Application.csproj" />
+  <Project Path="NoviBet.Domain/NoviBet.Domain.csproj" />
+  <Project Path="NoviBetConsole/NoviBetConsole.csproj" />
+  <Project Path="NoviBetInfrastructure/NoviBetInfrastructure.csproj" />
+  <Project Path="NoviCodeLearned/NoviCodeLearned.csproj" />
+</Solution>
