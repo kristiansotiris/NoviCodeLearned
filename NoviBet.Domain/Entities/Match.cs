@@ -18,8 +18,6 @@ namespace NoviBet.Domain.Entities
 
             MatchResult = result;
             MatchStatus = MatchStatus.Finished;
-
-
         }
 
     }
