@@ -7,5 +7,8 @@
         bool IsBlocked { get; }
         Guid PlayerId { get; }
 
+        void Deposit(decimal amount);
+        void Withdraw(decimal amount);
+
     }
 }

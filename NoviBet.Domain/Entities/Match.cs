@@ -18,8 +18,6 @@ namespace NoviBet.Domain.Entities
             MatchResult = null;
         }
 
-
-
         //Functions
         public void FinishGame(MatchResult result)
         {

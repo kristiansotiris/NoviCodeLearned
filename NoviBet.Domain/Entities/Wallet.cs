@@ -1,4 +1,6 @@
-﻿namespace NoviBet.Domain.Entities
+﻿using NoviBet.Domain.Exceptions;
+
+namespace NoviBet.Domain.Entities
 {
     public class Wallet : IWallet
     {
@@ -12,6 +14,27 @@
             Id = Guid.NewGuid();
             Balance = 0m;
             IsBlocked = false;
+        }
+
+        public void Deposit(decimal amount)
+        {
+            ValiDateTransaction(amount);
+            Balance += amount;
+        }
+
+        public void Withdraw(decimal amount)
+        {
+            ValiDateTransaction(amount);
+            Balance -= amount;
+        }
+
+        private void ValiDateTransaction(decimal amount)
+        {
+            if (IsBlocked)
+                throw new WalletBlockedException(Id);
+
+            if (amount <= 0)
+                throw new InvalidAmountException(amount);
         }
     }
 }
