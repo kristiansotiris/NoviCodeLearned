@@ -5,7 +5,7 @@
         public Guid Id { get; private set; }
         public decimal Balance { get; private set; }
         public bool IsBlocked { get; private set; }
-
+        public Guid PlayerId { get; }
 
         public Wallet()
         {

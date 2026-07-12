@@ -4,16 +4,15 @@ namespace NoviBet.Domain.Entities
 {
     public class Player : IPlayer
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public Guid Id { get; }
         public string Name { get; private set; }
         public PlayersRole Role { get; }
-        public Wallet PlayerWallet { get; }
 
         public Player(string name, PlayersRole role)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Role = role;
-            PlayerWallet = new Wallet();
         }
     }
 }

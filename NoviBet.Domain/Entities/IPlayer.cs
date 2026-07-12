@@ -7,7 +7,6 @@ namespace NoviBet.Domain.Entities
         Guid Id { get; }
         string Name { get; }
         PlayersRole Role { get; }
-        Wallet PlayerWallet { get; }
 
     }
 }

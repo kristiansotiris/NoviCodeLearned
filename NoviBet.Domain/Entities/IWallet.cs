@@ -5,6 +5,7 @@
         Guid Id { get; }
         decimal Balance { get; }
         bool IsBlocked { get; }
+        Guid PlayerId { get; }
 
     }
 }
