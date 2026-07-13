@@ -1,4 +1,5 @@
 ﻿using NoviBet.Domain.Enums;
+using NoviBet.Domain.Exceptions;
 
 namespace NoviBet.Domain.Entities
 {
@@ -10,9 +11,22 @@ namespace NoviBet.Domain.Entities
 
         public Player(string name, PlayersRole role)
         {
+            if(string.IsNullOrWhiteSpace(name))
+                throw new InvalidPlayerNameException(name);
+
             Id = Guid.NewGuid();
             Name = name;
             Role = role;
+        }
+
+        public void Rename(string newName)
+        {
+            if (string.IsNullOrWhiteSpace(newName))
+                throw new InvalidPlayerNameException(newName);
+
+            if (this.Name == newName) return;
+
+            Name = newName;
         }
     }
 }

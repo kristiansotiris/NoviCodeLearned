@@ -8,5 +8,7 @@ namespace NoviBet.Domain.Entities
         string Name { get; }
         PlayersRole Role { get; }
 
+        void Rename(string newName);
+
     }
 }

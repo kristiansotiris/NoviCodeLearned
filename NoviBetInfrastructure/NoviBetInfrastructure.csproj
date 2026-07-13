@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NoviBet.Domain\NoviBet.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
