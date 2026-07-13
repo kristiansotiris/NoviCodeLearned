@@ -1,4 +1,5 @@
 ﻿using NoviBet.Domain.Enums;
+using NoviBet.Domain.Exceptions;
 
 namespace NoviBet.Domain.Entities
 {
@@ -11,6 +12,15 @@ namespace NoviBet.Domain.Entities
 
         public Match(string homeTeam, string awayTeam)
         {
+            if (string.IsNullOrWhiteSpace(homeTeam))
+                throw new InvalidTeamNameException(homeTeam);
+
+            if (string.IsNullOrWhiteSpace(awayTeam))
+                throw new InvalidTeamNameException(awayTeam);
+
+            //if (string.Equals(homeTeam, awayTeam, StringComparison.OrdinalIgnoreCase))
+
+
             Id = Guid.NewGuid();
             HomeTeam = homeTeam;
             AwayTeam = awayTeam;
@@ -21,7 +31,7 @@ namespace NoviBet.Domain.Entities
         //Functions
         public void FinishGame(MatchResult result)
         {
-            if (MatchResult == result) throw new InvalidOperationException("Match is already finished.");
+            if (MatchStatus == MatchStatus.Finished) throw new MatchAlreadyFinishedException(Id);
 
             MatchResult = result;
             MatchStatus = MatchStatus.Finished;
