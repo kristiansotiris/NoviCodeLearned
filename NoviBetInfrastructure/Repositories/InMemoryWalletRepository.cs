@@ -17,6 +17,8 @@ namespace NoviBetInfrastructure.Repositories
             _wallets.Add(wallet);
         }
 
+        public Wallet? GetByPlayerId(Guid playerId) => _wallets.FirstOrDefault(w => w.PlayerId == playerId);
+
         public Wallet? GetWalletById(Guid walletId) => _wallets.FirstOrDefault(w => w.Id == walletId);
 
         public IEnumerable<Wallet> GetWallets() => _wallets.AsReadOnly();

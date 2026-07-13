@@ -7,5 +7,6 @@
             Wallet? GetWalletById(Guid walletId);
             IEnumerable<Wallet> GetWallets();
             void AddWallet(Wallet wallet);
-        }
+            Wallet? GetByPlayerId(Guid playerId);
+    }
     }
