@@ -45,7 +45,6 @@ namespace Application.Services
             _betRepository.AddBet(bet);
 
             return bet;
-
         }
 
         public void SettleBet(Guid betId)
