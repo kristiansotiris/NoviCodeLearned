@@ -41,15 +41,32 @@ namespace Application.Services
             }
 
             wallet.Withdraw(stake);
-
             _betRepository.AddBet(bet);
-
             return bet;
         }
 
         public void SettleBet(Guid betId)
         {
             var bet = _betRepository.GetBetById(betId) ?? throw new BetNotFoundException(betId);
+
+            var results = new Dictionary<Guid, MatchResult>();
+
+            foreach (var selection in bet.Selections)
+            {
+                var match = _matchRepository.GetMatchById(selection.MatchId) ?? throw new MatchNotFoundException(selection.MatchId);
+
+                if (match.MatchResult is not null)
+                    results[selection.MatchId] = match.MatchResult.Value;
+
+                bet.Settle(results);
+
+                if (bet.BetStatus == BetStatus.Won)
+                {
+                    var wallet = _walletRepository.GetByPlayerId(bet.PlayerId) ?? throw new WalletNotFoundException(bet.PlayerId);
+
+                    wallet.Deposit(bet.PotentialWinnings);
+                }
+            }
 
         }
     }
