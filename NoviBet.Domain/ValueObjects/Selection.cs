@@ -9,7 +9,7 @@ namespace NoviBet.Domain.ValueObjects
         public Odds Odds { get; }
 
 
-        public Selection(Guid matchId, string eventName, MatchResult result, Odds odd)
+        public Selection(Guid matchId, MatchResult result, Odds odd)
         {
 
             if (matchId == Guid.Empty) throw new InvalidMatchIdException(matchId);

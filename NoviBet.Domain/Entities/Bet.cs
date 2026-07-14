@@ -12,6 +12,7 @@ namespace NoviBet.Domain.Entities
         public Guid PlayerId { get; }
         public decimal Stake { get; }
         public BetStatus BetStatus { get; private set; }
+        public decimal PotentialWinnings => Stake * TotalOdds();
 
         public Bet(Guid playerid, decimal stake, IReadOnlyList<Selection> selections)
         {
@@ -46,9 +47,15 @@ namespace NoviBet.Domain.Entities
             if (BetStatus != BetStatus.Pending)
                 throw new BetAlreadySettledException(Id);
 
-            bool IsAllWon = _selections.All(s => results[s.MatchId] == s.MatchResult);
+            bool allMatchesHaveResults = _selections.All(s => results.ContainsKey(s.MatchId));
 
-            BetStatus = IsAllWon ? BetStatus.Won : BetStatus.Lost;
+
+            if (!allMatchesHaveResults)
+                throw new CannotSettleBetException(Id);
+
+            bool allWon = _selections.All(s => results[s.MatchId] == s.MatchResult);
+
+            BetStatus = allWon ? BetStatus.Won : BetStatus.Lost;
 
         }
 
