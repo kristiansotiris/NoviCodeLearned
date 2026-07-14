@@ -9,13 +9,16 @@ namespace NoviBet.Domain.ValueObjects
         public Odds Odds { get; }
 
 
-
-        public Selection(Guid id, MatchResult result, Odds odd)
+        public Selection(Guid matchId, MatchResult result, Odds odd)
         {
-            if (id == Guid.Empty) throw new InvalidMatchIdException(id);
 
+            if (matchId == Guid.Empty) throw new InvalidMatchIdException(matchId);
+
+            MatchId = matchId;
             MatchResult = result;
             Odds = odd;
         }
+
+        public bool IsWinning(MatchResult result) => MatchResult == result;
     }
 }
